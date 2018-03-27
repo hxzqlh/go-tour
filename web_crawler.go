@@ -39,13 +39,13 @@ func Crawl(url string, depth int, fetcher Fetcher, ori *sync.WaitGroup) {
 		ori.Done()
 		return
 	}
+	mp.Insert(url)
 	body, urls, err := fetcher.Fetch(url)
 	if err != nil {
 		fmt.Println(err)
 		ori.Done()
 		return
 	}
-	mp.Insert(url)
 	fmt.Printf("found: %s %q\n", url, body)
 	var queue sync.WaitGroup
 	for _, u := range urls {
