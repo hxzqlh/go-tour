@@ -1,8 +1,8 @@
 package main
 
 import (
-	"golang.org/x/tour/tree"
 	"fmt"
+	"golang.org/x/tour/tree"
 )
 
 func Dfs(t *tree.Tree, ch chan int) {
@@ -24,8 +24,8 @@ func Same(t1, t2 *tree.Tree) bool {
 	go Walk(t1, ch1)
 	go Walk(t2, ch2)
 	for {
-		v1, ok1 := <- ch1
-		v2, ok2 := <- ch2
+		v1, ok1 := <-ch1
+		v2, ok2 := <-ch2
 		switch {
 		case ok1 != ok2:
 			return false

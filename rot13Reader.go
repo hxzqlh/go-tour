@@ -2,8 +2,8 @@ package main
 
 import (
 	"io"
-	"strings"
 	"os"
+	"strings"
 )
 
 type rot13Reader struct {

@@ -29,7 +29,6 @@ func (mp *SafeMap) Insert(key string) {
 
 var mp = SafeMap{h: make(map[string]bool)}
 
-
 func Crawl(url string, depth int, fetcher Fetcher, ori *sync.WaitGroup) {
 	if depth <= 0 {
 		ori.Done()
