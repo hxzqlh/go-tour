@@ -12,5 +12,5 @@
 * [rot13Reader](https://tour.go-zh.org/methods/23)
 * [~~HTTP 处理~~](https://tour.go-zh.org/methods/14)
 * [图片](https://tour.go-zh.org/methods/25)
-* [等价二叉树](https://tour.go-zh.org/concurrency/8)
+* [等价二叉树](https://tour.go-zh.org/concurrency/7)
 * [Web爬虫](https://tour.go-zh.org/concurrency/10)
