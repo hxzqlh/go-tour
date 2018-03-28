@@ -6,9 +6,9 @@ import (
 
 func Pic(dx, dy int) [][]uint8 {
 	result := [][]uint8{}
-	for x := 0; x < dx; x++ {
-		temp := make([]uint8, dy)
-		for y := 0; y < dy; y++ {
+	for x := 0; x < dy; x++ {
+		temp := []uint8{}
+		for y := 0; y < dx; y++ {
 			temp = append(temp, uint8(x*y))
 		}
 		result = append(result, temp)
