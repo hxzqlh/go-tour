@@ -1,17 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"time"
-	"os"
 	"bufio"
+	"fmt"
+	"os"
+	"time"
 )
 
 type ch chan int
 
 func print1234(n int, ch, nxt *ch, w *bufio.Writer) {
 	for {
-		<- *ch
+		<-*ch
 		w.WriteString(fmt.Sprintf("%d ", n))
 		*nxt <- 1
 	}
@@ -33,16 +33,16 @@ func Print1234(l, start int, file string, mp *map[int]int) {
 		go print1234(i+1, &chs[i], &chs[(*mp)[i+1]-1], w)
 	}
 	chs[start-1] <- 1
-	time.Sleep(100*time.Millisecond)
+	time.Sleep(100 * time.Millisecond)
 	w.Flush()
 }
 
 func main() {
 	mp := map[int]int{
-		1:2,
-		2:3,
-		3:4,
-		4:1,
+		1: 2,
+		2: 3,
+		3: 4,
+		4: 1,
 	}
 	Print1234(4, 1, "A", &mp)
 	Print1234(4, 2, "B", &mp)
