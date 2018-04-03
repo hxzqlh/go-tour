@@ -24,8 +24,6 @@ func (i Image) At(x, y int) color.Color {
 }
 
 func main() {
-	// 可以自己设置宽高,传递进去
 	m := Image{}
-	// 3 调用
 	pic.ShowImage(m)
 }
