@@ -4,19 +4,20 @@ import (
 	"os"
 )
 
-func msgchan(msg string) chan string{
+func msgchan(msg string) chan string {
 	c := make(chan string)
 	go func() {
 		for {
 			c <- msg
-		}}()
+		}
+	}()
 	return c
 }
 
 func main() {
 	rchan := [4]chan string{}
 
-	for k := 0;k < 4 ; k++ {
+	for k := 0; k < 4; k++ {
 		data := string(byte(k)+'1') + " "
 		rchan[k] = msgchan(data)
 	}
@@ -45,18 +46,18 @@ func main() {
 		fdD.Close()
 	}()
 
-	for j:=0; j<1000;j++{
-		for i := 0;i < 4 ; i++ {
-			if _, errA := fdA.WriteString(<-rchan[i % 4]); errA != nil {
+	for j := 0; j < 1000; j++ {
+		for i := 0; i < 4; i++ {
+			if _, errA := fdA.WriteString(<-rchan[i%4]); errA != nil {
 				panic(errA)
 			}
-			if _, errB := fdB.WriteString(<-rchan[(i+1) % 4]); errB != nil {
+			if _, errB := fdB.WriteString(<-rchan[(i+1)%4]); errB != nil {
 				panic(errB)
 			}
-			if _, errC := fdC.WriteString(<-rchan[(i+2) % 4]); errC != nil {
+			if _, errC := fdC.WriteString(<-rchan[(i+2)%4]); errC != nil {
 				panic(errC)
 			}
-			if _, errD := fdD.WriteString(<-rchan[(i+3) % 4]); errD != nil {
+			if _, errD := fdD.WriteString(<-rchan[(i+3)%4]); errD != nil {
 				panic(errD)
 			}
 		}

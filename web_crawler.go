@@ -19,16 +19,16 @@ func Crawl(url string, depth int, fetcher Fetcher, c chan bool) {
 	// TODO: 不重复抓取页面。
 	// 下面并没有实现上面两种情况：
 	if depth <= 0 {
-		c<-true
+		c <- true
 		return
 	}
 
 	mux.Lock()
-	_, ok := urlmap[url];
+	_, ok := urlmap[url]
 	mux.Unlock()
 
 	if ok {
-		c<-true
+		c <- true
 		return
 	}
 
@@ -40,25 +40,25 @@ func Crawl(url string, depth int, fetcher Fetcher, c chan bool) {
 
 	if err != nil {
 		fmt.Println(err)
-		c<-true
+		c <- true
 		return
 	}
 	fmt.Printf("found: %s %q\n", url, body)
 
 	subc := make(chan bool)
 	for _, u := range urls {
-		go Crawl(u, depth-1, fetcher,subc)
+		go Crawl(u, depth-1, fetcher, subc)
 	}
 
-	for i := 0;i<len(urls); i++ {
+	for i := 0; i < len(urls); i++ {
 		<-subc
 	}
-	c<-true
+	c <- true
 	return
 }
 
 func main() {
-	c := make(chan bool,10)
+	c := make(chan bool, 10)
 	Crawl("https://golang.org/", 4, fetcher, c)
 	<-c
 }

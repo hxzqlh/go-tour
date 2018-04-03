@@ -8,7 +8,7 @@ import (
 func WordCount(s string) map[string]int {
 	result := map[string]int{}
 	var word []string = strings.Split(s, " ")
-	for i:= 0; i<len(word); i++ {
+	for i := 0; i < len(word); i++ {
 		if _, ok := result[word[i]]; ok {
 			result[word[i]]++
 		} else {
