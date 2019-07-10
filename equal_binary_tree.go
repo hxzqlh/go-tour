@@ -32,7 +32,7 @@ func Same(t1, t2 *tree.Tree)bool {
 
 func main() {
 	ch := make(chan int, 10)
-	go Walk(tree.New(2), ch)
+	go Walk(tree.New(1), ch)
 	for i:=0;i<10 ;i++ {
 		fmt.Printf("%d ",<-ch)
 	}
