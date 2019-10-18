@@ -9,8 +9,6 @@ import (
 type Urls struct {
 	done map[string]bool
 	mux  sync.Mutex
-	// rutCnt int
-	// cmux   sync.Mutex
 }
 
 type Fetcher interface {
@@ -26,9 +24,6 @@ func Crawl(url string, U *Urls, depth int, fetcher Fetcher, ch chan string) {
 	if depth <= 0 {
 		return
 	}
-	// U.cmux.Lock()
-	// U.rutCnt++
-	// U.cmux.Unlock()
 	body, urls, err := fetcher.Fetch(url)
 	U.mux.Lock()
 	U.done[url] = true
@@ -57,16 +52,11 @@ func main() {
 	ch := make(chan string)
 	U := Urls{done: make(map[string]bool)}
 	go Crawl("https://golang.org/", &U, 4, fetcher, ch)
-	// var RC int
 	for v := range ch {
 		fmt.Println(v)
-		// U.cmux.Lock()
-		// rc := U.rutCnt
-		// U.cmux.Unlock()
 		if runtime.NumGoroutine() == 1 {
 			return
 		}
-		// RC = rc
 	}
 }
 
